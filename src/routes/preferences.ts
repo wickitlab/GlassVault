@@ -1,11 +1,10 @@
 import { Router, Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import deepExtend from "deep-extend";
-import { getDb } from "../database";
 
 const router = Router();
 
-// In-memory user preferences (loaded from DB on first access)
+// In-memory user preferences (per process, not persisted; lost on restart)
 const preferencesCache: Record<string, Record<string, any>> = {};
 
 const DEFAULT_PREFERENCES = {
